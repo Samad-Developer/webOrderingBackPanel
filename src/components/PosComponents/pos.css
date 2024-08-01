@@ -1,0 +1,81 @@
+@keyframes blink {
+  0% {
+    background-color: rgba(255, 0, 0, 1);
+  }
+  50% {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+  100% {
+    background-color: rgba(255, 0, 0, 1);
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    background-color: rgba(255, 0, 0, 1);
+  }
+  50% {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+  100% {
+    background-color: rgba(255, 0, 0, 1);
+  }
+}
+.orderStatus {
+  padding: 5px 5px 5px 5px;
+  text-align: center;
+  margin-bottom: 4px;
+  font-size: 12px;
+  border-radius: 5px;
+  -moz-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -moz-animation: blink normal 1.5s infinite ease-in-out;
+  /* Firefox */
+  -webkit-animation: blink normal 1.5s infinite ease-in-out;
+  /* Webkit */
+  -ms-animation: blink normal 1.5s infinite ease-in-out;
+  /* IE */
+  animation: blink normal 1.5s infinite ease-in-out;
+  /* Opera */
+}
+
+.posTableStyle {
+  height: 68vh;
+  overflow: auto;
+}
+
+.posTableStyle td,
+.posTableStyle th {
+  padding: 5px;
+}
+
+.checkoutLeftDiv {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 0 10px;
+  height: 100%;
+}
+
+.checkoutRightDiv {
+  border-left: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  flex-direction: column;
+}
+
+.checkoutRightDiv button {
+  white-space: normal;
+}
+
+.newButton {
+  height: 45px !important;
+  width: 95% !important;
+}
+
+.checkoutKeypad {
+  width: 275px;
+}

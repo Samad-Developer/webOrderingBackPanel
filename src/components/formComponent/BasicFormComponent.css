@@ -1,0 +1,54 @@
+.ant-drawer-title {
+  font-weight: bold !important;
+  /* color: rgb(69, 97, 185) !important; */
+  color: #fff !important;
+  font-size: 24px !important;
+}
+
+.formDrawerContainer .ant-space.ant-space-horizontal {
+  gap: 0px !important;
+}
+
+.formDrawerHeader .ant-btn-primary {
+  border: 1px solid #fff !important;
+}
+
+.formDrawerHeader {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  padding: 12px 18px;
+  z-index: 1;
+  justify-content: space-between;
+  align-items: center;
+  background: #4561b9 !important;
+  /* background: #336fc4 !important; */
+  box-shadow: 0 1px 5px #898989;
+  /* background: linear-gradient(100deg, rgb(0 34 139) 0%, rgba(69, 97, 185) 25%) !important;
+    background-image: linear-gradient(to bottom right, rgb(0 41 168), rgb(80 112 213), rgb(0 143 220)) !important; */
+}
+
+.formDrawerHeader h2 {
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+}
+
+.formDrawerContainer .ant-drawer-body {
+  padding: 4px !important;
+}
+
+.formDrawerBody {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  /* align-items: flex-end; */
+  width: 100%;
+}
+
+.checkoutformBody {
+  padding: 10px !important;
+  height: 90vh;
+}

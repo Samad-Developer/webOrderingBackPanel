@@ -1,0 +1,231 @@
+::-webkit-scrollbar {
+  width: 10px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.tileButton,
+.tileButton:focus,
+.tileButton:hover {
+  background-color: #4561b9 !important;
+  border-color: #4561b9 !important;
+}
+.tileButton > span {
+  white-space: break-spaces;
+}
+
+.dashboardSections .tileButton svg {
+  font-size: 26px;
+}
+
+.dashboardContainer {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  user-select: none;
+  cursor: e-resize;
+  /* background-image: url(../../assets/images/dashboardBG.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right; */
+}
+.dashboardContainer > div {
+  transition: 0.5s;
+}
+
+.dashboardContainer.active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+/* .dashboardChart {
+  width: 940px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 20px;
+} */
+.dashboardChart {
+  height: calc(100% - 122px) !important;
+}
+.dashboardChart .ant-card {
+  width: 300px;
+  margin-top: 5px;
+}
+.dashboardChart .dashboardCard .ant-card-body {
+  display: flex;
+  justify-content: flex-end;
+  height: 100px;
+}
+.dashboardChart .dashboardCard .ant-card-body:hover {
+  box-shadow: 0px 4px 8px lightgrey;
+  transition: 0.3s ease-out;
+}
+.dashboardChart .dashboardCard .ant-card-body:hover .cardIcon {
+  top: -8px;
+  transition: 0.3s ease-out;
+}
+.dashboardChart .dashboardCard .cardIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 86px;
+  width: 86px;
+  background: #4561b9;
+  border-radius: 2px;
+  position: absolute;
+  left: 10px;
+  top: 7px;
+  transition: 0.3s ease-out;
+}
+.dashboardChart .dashboardCard .cardIcon svg {
+  color: #fff;
+  font-size: 36px;
+}
+.dashboardCard .anticon svg {
+  font-size: 28px;
+}
+.dashboardChart .dashboardCard .cardDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.dashboardChart .dashboardCard .cardDetails p {
+  margin-bottom: 5px;
+  color: #aaa;
+}
+.dashboardChart .dashboardCard .cardDetails h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #4561b9;
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-right: 50px;
+  height: calc(100% - 50px);
+}
+
+#n0 {
+  margin: 0px 50px 0 0px;
+  /* background-color: white; */
+  border-radius: 5px;
+  /* box-shadow: 0 0 10px lightgrey; */
+  overflow: visible !important;
+}
+
+/* .button {
+  background-color: #4561b9 !important;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  box-shadow: 0 0px 6px #b3b3b3;
+} */
+
+.dashboardSections {
+  /* border-left: 2px solid #e1e1e1; */
+  padding-left: 30px;
+}
+
+.dashboardChartDiv {
+  display: flex;
+}
+
+.dashboardChartInner {
+  width: 1050px;
+  /*height: "Calc(100vh - 90px)",*/
+  padding: 10px;
+  overflow: visible;
+  margin-top: 27px;
+  margin-right: 20px;
+}
+
+.dashboardChartFilter {
+  border-radius: 4px;
+  padding: 10px;
+  margin-right: 30px;
+  margin-bottom: 8px;
+  background: #ffffff;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  align-items: flex-end;
+  justify-content: space-between;
+  display: flex;
+  gap: 5px;
+}
+.dashboardChartFilterInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  /* width: 100%; */
+  flex-grow: 1;
+}
+.selectInput {
+  /* width: 100%; */
+  display: inline;
+  /* flex-grow: 1; */
+}
+.chartStyle {
+  background: #ffffff;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 20px;
+  /* height: 380px; */
+  height: 38vh;
+}
+
+.chart1Style {
+  margin-right: 10px;
+}
+
+.dashboardChartRow {
+  /* height: "269px",  */
+  /* margin-top: 20px; */
+}
+
+.dashboardTableInner {
+  /* width: 1050px; */
+  padding: 10px;
+  overflow: visible;
+  margin-top: 27px;
+  margin-right: 20px;
+}
+
+.dashboardTableRow {
+  /* height: 269px;
+  margin-top: 20px; */
+}
+
+.dashboardtableStyle {
+  background: #ffffff;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 18px;
+  margin-right: 10px;
+  /* height: 380px; */
+  height: 37vh;
+}
+
+.dashboardTableHeight {
+  height: 27vh;
+  overflow: auto;
+}
+
+.tableColumn {
+  width: 800px;
+}

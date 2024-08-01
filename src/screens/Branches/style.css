@@ -1,0 +1,37 @@
+.branchListContainer {
+  border: 1px solid lightgray;
+  border-radius: 2px;
+}
+
+.branchListItem {
+  width: 100%;
+  display: flex;
+}
+
+.branchListItem th {
+  background-color: #f5f5f5;
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: 500;
+}
+
+.listContainer {
+  border: 1px solid lightgray;
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.listItem {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+}
+
+th,
+td {
+  padding: 10px;
+}
+
+.ant-drawer-header {
+  padding: 12px 24px !important;
+  background-color: #00954a !important;
+}

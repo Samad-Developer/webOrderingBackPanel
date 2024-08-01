@@ -1,0 +1,166 @@
+.mainHeader {
+  box-shadow: 0 1px 5px rgb(92, 92, 92) !important;
+  z-index: 99 !important;
+  background: #3f58a9 !important;
+  /* background: #00954a !important; */
+  /* background: linear-gradient(100deg, rgb(0 34 139) 0%, rgba(69, 97, 185) 25%) !important;
+  background-image: linear-gradient(to bottom right, rgb(0 41 168), rgb(80 112 213), rgb(0 143 220)) !important; */
+}
+.mainFooter {
+  box-shadow: 0 1px 5px rgb(92 92 92) !important;
+  /* z-index: 9999 !important; */
+  background: #f5f5f5 !important;
+  padding: 8px;
+  text-align: center;
+  color: #3f58a9;
+  /* position: absolute; */
+  bottom: 0;
+  width: 100%;
+}
+
+.header-col {
+  display: "flex" !important;
+  align-items: "center" !important;
+}
+
+.indicator {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+}
+
+.ant-layout-header {
+  padding: 0 25px !important;
+}
+
+.ant-layout-header .sync-button {
+  display: flex;
+  align-items: center;
+}
+
+.ant-layout-header .ant-btn-text,
+.ant-layout-header .ant-btn-text:focus,
+.ant-layout-header .ant-btn-text:hover {
+  color: #fff;
+}
+
+.ant-layout-header h2,
+.ant-layout-header h3 {
+  color: #fff;
+}
+
+.sync-button > span > svg {
+  font-size: large !important;
+}
+
+.content-container {
+  /* background-image: url("../assets/images/dashboardBG.png") !important; */
+  /* background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: right !important; */
+}
+
+.timeStyle {
+  font-size: 32px;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+.userImage {
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  margin: 0px 8px 0 0;
+}
+
+.userTitle {
+  margin-right: 5px;
+}
+
+@media only screen and (max-width: 1366px) {
+  .posTableStyle th,
+  .posTableStyle td {
+    font-size: 12px;
+    line-height: 20px;
+    padding: 5px !important;
+  }
+  .posRightDiv {
+    padding: 5px !important;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .timeStyle {
+    font-size: 28px;
+  }
+  .userTitle,
+  .userIcon {
+    display: none;
+  }
+  .userImage {
+    margin: 0px;
+  }
+  .posTableStyle td,
+  .posTableStyle th {
+    font-size: 10px;
+    padding: 5px !important;
+  }
+  .rightTabsWhiteButton {
+    height: 60px !important;
+    width: 60px !important;
+  }
+  .posFormTitleButton {
+    height: 85px !important;
+  }
+  .ant-tabs-custom span {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .headerCompanyName,
+  .timeStyle,
+  .sync-button,
+  .sidebarButton,
+  .mainSidebar,
+  .dashboardSections {
+    display: none !important;
+  }
+  .mainHeader {
+    padding: 0 10px !important;
+  }
+  .dashboardContainer {
+    flex-direction: column;
+  }
+  .chartStyle {
+    width: 89vw;
+  }
+  .dashboardChartInner {
+    width: 100% !important;
+    margin-right: 0px !important;
+    padding: 12px !important;
+  }
+  .dashboardChartFilter {
+    flex-direction: column !important;
+    align-items: stretch;
+    margin-right: 5px !important;
+  }
+  .dashboardChartFilterInput,
+  .selectInput {
+    width: 100%;
+  }
+  .dashboardChartRow {
+    flex-direction: column !important;
+  }
+  .dashboardChart {
+    width: 100% !important;
+    padding: 0 5px;
+  }
+  .dashboardChart .ant-card {
+    width: 100% !important;
+  }
+  .dashboardTableInner,
+  .dashboardtableStyle {
+    margin-right: 0px !important;
+  }
+}

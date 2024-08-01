@@ -1,0 +1,152 @@
+.authParent {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  /* background: url("../../assets/images/login-bg.jpg"); */
+}
+
+.insideAuth {
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+}
+
+.authChild {
+  padding: 10px;
+  width: 430px;
+  margin-top: 20px;
+  row-gap: 10px !important;
+}
+
+/* .authChild .textInput,
+.ant-select {
+  margin-top: 10px !important;
+  border-radius: 5px;
+  height: 40px !important;
+  /* border-color: #4561b9; */
+/* border: 1px solid #707070;
+  font-size: 20px;
+  color: #4561b9;
+} */
+
+/* .ant-select:hover {
+  border-color: var(--ant-primary-5);
+  border-right-width: 1px;
+  z-index: 1;
+}
+
+.ant-select-focused,
+.ant-select:focus {
+  border-color: var(--ant-primary-color-hover);
+  box-shadow: 0 0 0 2px var(--ant-primary-color-outline);
+  border-right-width: 1px;
+  outline: 0;
+}
+
+.ant-select-focused .ant-select-selector {
+  box-shadow: none !important;
+}
+
+.ant-select-selector {
+  background-color: unset !important;
+  border: unset !important;
+} */
+
+.logo {
+  position: relative;
+  width: 250px;
+  height: auto;
+}
+
+/* .authChild .actionButton {
+  border-radius: 5px;
+  background-color: #4561b9;
+  margin-top: 20px;
+  width: 125px;
+  height: 42px;
+  position: relative;
+  text-align: center;
+  font-size: 15px;
+} */
+
+.authChild .forgotPassword {
+  position: relative;
+  float: right;
+  color: #4561b9;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500 !important;
+  line-height: 12px;
+  letter-spacing: 0em;
+}
+
+.authChild .signUpTxt {
+  margin-top: 30px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500 !important;
+  line-height: 12px;
+  letter-spacing: 0em;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.copyRightTxt {
+  height: 12px;
+  font-style: normal;
+  font-weight: 400 !important;
+  font-size: 12px;
+  line-height: 12px;
+  color: #707070 !important;
+  position: absolute;
+  bottom: 15px;
+  text-align: center;
+  width: 100%;
+}
+
+/* .insideAuth input.ant-input {
+  color: #707070;
+  margin-left: 6px;
+  font-size: 17px;
+} */
+
+.anticon svg {
+  display: inline-block;
+  font-size: 15px;
+}
+
+.authChild .forgotPasswordDiv {
+  width: 100%;
+}
+
+.authChild .formAction {
+  text-align: center;
+  width: 100%;
+}
+
+.authLogo {
+  text-align: center;
+}
+
+.goBackToLogin {
+  border-radius: 5px;
+  color: #4561b9 !important;
+  margin-top: 30px;
+  font-weight: 500 !important;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+@media only screen and (max-width: 414px) {
+  .authChild {
+    width: 300px !important;
+  }
+  .logo {
+    width: 200px;
+  }
+}
