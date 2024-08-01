@@ -26,7 +26,14 @@ const FormButton = (props) => {
     if (loading === false) onClick(e);
     else return null;
   };
-
+  const mergedStyle = {
+    borderRadius: 5,
+    width: width,
+    backgroundColor: title === "Add New" ? color  : '#017971',
+    borderColor: title === "Add New" ? color : null,
+    ...style
+  };
+  
   return (
     <Col style={colStyle} span={colSpan}>
       <Button
@@ -42,7 +49,7 @@ const FormButton = (props) => {
         ${color && color === "red" ? "red" : null} ${
           color && color === "gray" ? "gray" : null
         }`}
-        style={style || { borderRadius: 5, width: width, backgroundColor: '#017971' }}
+        style={mergedStyle}
       >
         {title}
       </Button>

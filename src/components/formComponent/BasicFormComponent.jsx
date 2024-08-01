@@ -255,7 +255,7 @@ const BasicFormComponent = (props) => {
                     colSpan={2}
                     htmlType="button"
                     onClick={handleReset}
-                    style={{ marginLeft: '10px' }}
+                    style={{ marginLeft: '10px', color:'white' }}
                     icon={<ClearOutlined />}
                   />
                 )}
@@ -289,7 +289,7 @@ const BasicFormComponent = (props) => {
               icon={<PlusOutlined />}
               title="Add New"
               size={BUTTON_SIZE}
-              color="green"
+              color="#01C2A6"
               onClick={() => {
                 onFormOpen && onFormOpen();
                 setVisible(true);
