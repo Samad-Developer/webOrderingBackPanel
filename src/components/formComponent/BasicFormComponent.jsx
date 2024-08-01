@@ -220,7 +220,7 @@ const BasicFormComponent = (props) => {
 
   return (
     <div style={{ margin: 5 }}>
-      <Title level={3} style={{ color: "#4561B9" }}>
+      <Title level={3} style={{ color: "#017971" }}>
         {formTitle}
       </Title>
       <div

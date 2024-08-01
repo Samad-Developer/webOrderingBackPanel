@@ -13,7 +13,7 @@ const ViewOrderModal = (props) => {
   let { viewOrder, data, toggleViewOrder } = props;
   const { OrderMasterId,AreaId,OrderSourceId,AreaName,OrderNumber,OrderDate } = data?.Table[0] || {};
   const controller = new window.AbortController();
-
+  const [isStatusChange, setIsStatusChange] = useState(false)
 
   
 
@@ -107,6 +107,7 @@ console.log("props data", data);
   //   }, [supportingTable]);
    
   const handleStatusChange = async (data) => {
+    setIsStatusChange(true)
     setOrderStatus(data.value);
   
     if (data.value !== null) {
@@ -136,9 +137,9 @@ console.log("props data", data);
   
       try {
         const response = await axios.post("/UpdateOrderStatus", {
-          OperationId: 1,
+          OperationId: 3,
           OrderMasterId,
-          CompanyId: 3,
+          CompanyId: 152,
           OrderStatusId: data.value,
           DateFrom: "2022-01-13 00:00:00.000",
           DateTo:"2023-11-13 00:00:00.000",
@@ -193,6 +194,10 @@ console.log("props data", data);
       onCancel={toggleViewOrder}
       footer={null}
       width={"60vw"}
+      afterClose={() => {
+        setIsStatusChange(false)
+        console.log('i am called')
+      }}
     >
       <Spin spinning={data === null}>
         <div>
@@ -213,7 +218,7 @@ console.log("props data", data);
           valueName="OrderStatus"
           size={INPUT_SIZE}
           name="OrderStatusId"
-          value={orderStatus || ""}
+          value={isStatusChange ? orderStatus : data?.Table[0].OrderStatusId || ""}
           onChange={handleStatusChange}
         />
       </Col>

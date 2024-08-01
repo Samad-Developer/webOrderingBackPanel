@@ -469,7 +469,7 @@ const BillManagement = () => {
 
   return (
     <div style={{ margin: 5 }}>
-      <h1 style={{ color: "#4561B9", fontSize: 28 }}>
+      <h1 style={{ color: "#017971", fontSize: 28 }}>
         <b>Bill Management</b>
       </h1>
       <div

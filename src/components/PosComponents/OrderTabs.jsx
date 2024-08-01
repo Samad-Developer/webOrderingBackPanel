@@ -783,7 +783,7 @@ const OrderTabs = (props) => {
       const foundOrders = data.filter((item) => {
         if (item.OrderModeId === TAKE_AWAY) {
           if (item.OrderStatus === "New") {
-            playOrderSound();
+            // ();
           }
           return item;
         }

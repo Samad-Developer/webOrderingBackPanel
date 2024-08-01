@@ -18,7 +18,7 @@ import { MdMenuOpen } from "react-icons/md";
 import { DAY_SHIFT_TERMINAL, DISPATCHER } from "../common/SetupMasterEnum";
 import "./style.css";
 
-const HeaderLayout = (props) => {
+const HeaderLayout = ({toggleCollapse, collapsable}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { CompanyName, Name, online, userBranchList, RoleId, UserName } =
@@ -182,12 +182,12 @@ const HeaderLayout = (props) => {
           >
             <Button
               type="text"
-              onClick={props.toggleCollapse}
+              onClick={toggleCollapse}
               icon={
                 <MdMenuOpen
                   style={{
                     fontSize: 28,
-                    transform: props.collapsable && "scaleX(-1)",
+                    transform: collapsable && "scaleX(-1)",
                     transition: "0.2s",
                   }}
                 />
@@ -195,7 +195,7 @@ const HeaderLayout = (props) => {
               className="sidebarButton"
               style={{ marginRight: 20 }}
             />
-            {RoleId !== 14 && (
+            {/* {RoleId !== 14 && (
               <h3 style={{ marginBottom: 0, marginRight: 10 }}>
                 Branch:{" "}
                 <b>
@@ -209,7 +209,7 @@ const HeaderLayout = (props) => {
                     ? userBranchList[0].BranchName
                     : ""}
                 </b>
-                {/* , Counter: <b>Main</b> */}
+                
               </h3>
             )}
             {RoleId !== 1 && RoleId !== 3 && RoleId !== 0 && (
@@ -227,7 +227,7 @@ const HeaderLayout = (props) => {
                     : ""}
                 </b>
               </h3>
-            )}
+            )} */}
           </div>
         </Col>
         <Col
@@ -251,10 +251,10 @@ const HeaderLayout = (props) => {
               justifyContent: "flex-end",
             }}
           >
-            <h3 className="timeStyle">{date}</h3>
-            <h3 className="timeStyle">{time}</h3>
+            {/* <h3 className="timeStyle">{date}</h3>
+            <h3 className="timeStyle">{time}</h3> */}
 
-            <Tooltip placement="bottom" title="Full Screen">
+            {/* <Tooltip placement="bottom" title="Full Screen">
               <Button className="sync-button" type="text" onClick={fullScreen}>
                 {!isFullscreen ? (
                   <FullscreenOutlined />
@@ -262,7 +262,7 @@ const HeaderLayout = (props) => {
                   <FullscreenExitOutlined />
                 )}
               </Button>
-            </Tooltip>
+            </Tooltip> */}
             <ImageDropdown
               title={Name}
               menu={menu}

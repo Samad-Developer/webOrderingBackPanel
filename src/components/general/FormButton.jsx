@@ -42,7 +42,7 @@ const FormButton = (props) => {
         ${color && color === "red" ? "red" : null} ${
           color && color === "gray" ? "gray" : null
         }`}
-        style={style || { borderRadius: 2, width: width }}
+        style={style || { borderRadius: 5, width: width, backgroundColor: '#017971' }}
       >
         {title}
       </Button>

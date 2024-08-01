@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import FormTextField from "../../components/general/FormTextField";
 import { postImageRequest, postRequest } from "../../services/mainApp.service";
+import { Popconfirm } from 'antd';
 
 const WebOrdering = () => {
   const [tableData, setTableData] = useState([]);
@@ -19,21 +20,22 @@ const WebOrdering = () => {
   });
 
   const combineData = (settingsList, tableData) => {
-   
+
     return settingsList.map((setting) => {
       const correspondingData = tableData.find((data) => data.SetupDetailId === setting.SetupDetailId);
-      
+
       return {
         ...setting,
         SettingId: correspondingData?.SettingId,
         SettingValue: correspondingData?.SettingValue,
       };
-      
+
     });
   };
 
   const combinedData = combineData(settingsList, tableData);
-  
+  const banners = tableData.filter(detail => detail.SetupDetailName === 'Upload Banner');
+
 
   const onColorChange = (key, newValue) => {
     setTableData((prevData) =>
@@ -56,18 +58,24 @@ const WebOrdering = () => {
       render: (_, record) =>
         record.Flex2 === "IMG" || record.Flex2 === 'MULTIPLE_IMG' ? (
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            {record.SettingValue ? <Image
-              src={process.env.REACT_APP_BASEURL + "/" + record.SettingValue}
-              style={{ width: "50px", height: "50px" }}
-            /> : <div style={{ padding: '5px', textAlign: 'center' }}>
-            <FrownOutlined style={{ fontSize: '48px', color: 'black' }} />
-            <p>No Image</p>
-          </div>}
+            {
+            record.Flex2 !== 'MULTIPLE_IMG' && <>
+            {
+              record.SettingValue ? <Image
+                src={process.env.REACT_APP_BASEURL + "/" + record.SettingValue}
+                style={{ width: "50px", height: "50px" }}
+              /> : <div style={{ padding: '5px', textAlign: 'center' }}>
+                <FrownOutlined style={{ fontSize: '48px', color: 'black' }} />
+                <p>No Image</p>
+              </div>
+            }
+            </> 
+            }
             <input
               type="file"
               title="Upload Image"
               name="File"
-              style={{ marginTop: "20px" }}
+              style={{ marginTop: "10px" }}
               onChange={(e) => handleImageChange(e, record)}
             />
           </div>
@@ -92,7 +100,7 @@ const WebOrdering = () => {
           </div>
         ) : (
           <>
-            <p style={{  }}>{record.SettingValue}</p>
+            <p style={{}}>{record.SettingValue}</p>
             <FormTextField
               colSpan={16}
               placeholder="Enter top bar text"
@@ -124,7 +132,7 @@ const WebOrdering = () => {
 
           <Button
             type="primary"
-            style={{ marginTop: "auto", borderRadius: '5px' }}
+            style={{ marginTop: "auto", borderRadius: '5px', backgroundColor: '#017971' }}
             onClick={(e) => {
               if (record.Flex2 === 'COLOR') {
                 updateColor(record);
@@ -145,7 +153,7 @@ const WebOrdering = () => {
                   case 'TEXT':
                     return 'Update Text';
                   case 'MULTIPLE_IMG':
-                    return 'Updated Bannar'    
+                    return 'Updated Bannar'
                   default:
                     return '';
                 }
@@ -271,7 +279,7 @@ const WebOrdering = () => {
       formData.append("Value", settingsObj.File);
       formData.append("UserIP", "12.1.1.12");
       formData.append("SetupDetailId", settingsObj.SettingId);
-      console.log('this is your fomData', formData)
+
       postImageRequest("/WebOrderingSetting", formData, controller).then(
         (response) => {
           if (response.error === true) {
@@ -331,9 +339,40 @@ const WebOrdering = () => {
       });
     }
   };
+
+  const handleDelete = (banner) => {
+   
+      const formData = new FormData();
+      formData.append("OperationId", 4);
+      formData.append("CompanyId", userData.CompanyId);
+      formData.append("UserId", userData.UserId);
+      formData.append("SettingId", banner.SettingId);
+      formData.append("Value", null);
+      formData.append("UserIP", "12.1.1.12");
+      formData.append("SetupDetailId", banner.SettingId);
+
+      postImageRequest("/WebOrderingSetting", formData, controller).then(
+        (response) => {
+          if (response.error === true) {
+            message.error(response.errorMessage);
+            return;
+          }
+          if (response.data.response === false) {
+            message.error(response.DataSet.Table.Error_Message);
+            return;
+          }
+          if (response.data.Response === true) {
+            setTableData(response.data.DataSet.Table2);
+          }
+          message.success("Deleted Successfully");
+        }
+      );
+    }
+
+
   return (
     <>
-      <Title level={3}>Web Ordering Settings</Title>
+      <Title level={3} style={{color:'#017971'}}>Web Ordering Settings</Title>
       <Menu
         mode="horizontal"
         selectedKeys={[activeTab]}
@@ -344,6 +383,22 @@ const WebOrdering = () => {
         ))}
       </Menu>
       <Table columns={columns} dataSource={combinedData.filter(item => item.ParentName === activeTab)} rowKey="SetupDetailId" />
+          { activeTab === 'Banner'  && <div>
+        {banners.map(banner => (
+          <div key={banner.SettingId} style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginBottom: '10px' }}>
+            <img src={process.env.REACT_APP_BASEURL + "/" + banner.SettingValue} alt="Banner" style={{ width: '160px', borderRadius: '10px', height: '80px', marginRight: '10px' }} />
+            <Popconfirm
+            title="Are you sure to delete this banner?"
+            onConfirm={() => handleDelete(banner)}
+            
+            okText="Yes"
+            cancelText="No"
+          >
+           <button style={{ padding: '8px 23px', backgroundColor: 'red', cursor:'pointer',borderRadius: '5px', color: 'white', border: 'none' }}>Delete</button>
+           </Popconfirm>
+          </div>
+        ))}
+      </div>} 
     </>
   );
 };

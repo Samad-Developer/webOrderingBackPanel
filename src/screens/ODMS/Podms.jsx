@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import FormTextField from '../../components/general/FormTextField';
 import { INPUT_SIZE } from '../../common/ThemeConstants';
+import { playNotificationSound } from '../../functions/generalFunctions';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 import {
   Col,
   Drawer,
@@ -27,6 +30,46 @@ import { itemDetail } from './ItemDetail';
 const { Panel } = Collapse;
 import { Popover } from 'antd';
 
+
+
+const ExportExcelButton = ({ dataSource }) => {
+  const exportToExcel = () => {
+    const fileType =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    const fileExtension = '.xlsx';
+    const fileName = 'order_data_export';
+
+    // Prepare data for export, including handling the Action column
+    const exportData = dataSource.map(item => {
+      // Create a new object to avoid mutating original data
+      const exportItem = {
+        OrderNumber: item.OrderNumber,
+        BranchName: item.BranchName,
+        PhoneNumber: item.PhoneNumber,
+        CustomerName: item.CustomerName,
+        OrderDateTime: item.OrderDateTime,
+        OrderDeliveryDateTime: item.OrderDeliveryDateTime,
+        TotalAmountWithGST: item.TotalAmountWithGST,
+        RiderName: item.RiderName,
+        DeliveryTime: item.DeliveryTime,
+        OrderSourceValue: item.OrderSourceValue,
+        OrderStatus: item.OrderStatus,
+      };
+
+      return exportItem;
+    });
+
+    const ws = XLSX.utils.json_to_sheet(exportData);
+    const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
+    const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+
+    const data = new Blob([excelBuffer], { type: fileType });
+    saveAs(data, fileName + fileExtension);
+  };
+
+  return <Button style={{ color: 'white', backgroundColor: '#017971', borderRadius: '5px' }} onClick={exportToExcel}>Export to Excel</Button>;
+};
+
 function Podms() {
 
   const [orderStatusList, setOrderStatusList] = useState([]);
@@ -42,6 +85,7 @@ function Podms() {
   const [viewOrder, setViewOrder] = useState(false);
   const timeOutRef = useRef(null);
   const [expandedRow, setExpandedRow] = useState(null);
+
   // New Api Calling
   const [newviewOrderData, setNewViewOrderData] = useState(null);
   const [NewviewOrder, setNewViewOrder] = useState(false);
@@ -183,9 +227,10 @@ function Podms() {
 
   const formattedDateFrom = moment(searchFields.DateFrom).format("YYYY-MM-DD 00:00:00.000");
   const formattedDateTo = moment(searchFields.DateTo).format("YYYY-MM-DD 00:00:00.000");
-
+  const notifiedOrderIds = new Set();
 
   const fetchDataFromApi = () => {
+
     postRequest('GetOrder', {
       OperationId: 1,
       UserIP: '12.1.1.2',
@@ -218,17 +263,27 @@ function Podms() {
       const data = response.data.DataSet;
       const { Table2, Table3, Table4, Table10, Table } = data;
 
+      // Define a function to check and play notification
+      function checkAndNotify() {
+        const hasPendingOrder = Table.some(order => order.OrderStatusId === 819);
+        if (hasPendingOrder) {
+          playNotificationSound();
+        }
+      }
+      checkAndNotify();
+
+
       // Populate your dropdown lists based on the data
       setOrderStatusList(Table2 || []);
+      setFilteredData(Table || []);
       setBranchList(Table3 || []);
       setAreaList(Table4 || []);
       setOrderSourceList(Table10 || []);
-      setFilteredData(Table || []);
+
     }).catch((error) => {
       console.error('Error:', error);
     });
   };
-
 
   // Add a function to handle form submission
   // useEffect(() => {
@@ -239,7 +294,7 @@ function Podms() {
     fetchDataFromApi();
     const intervalId = setInterval(() => {
       fetchDataFromApi();
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -273,14 +328,14 @@ function Podms() {
      * @param {{}} data event object of field
      */
   const handleSelectChange = (data) => {
-    
+
     if (data.value !== null) {
       setSearchFields({ ...searchFields, [data.name]: data.value });
     } else {
       // If the user clears the selection, set the field to null
       setSearchFields({ ...searchFields, [data.name]: null });
     }
-    
+
   };
 
 
@@ -292,7 +347,7 @@ function Podms() {
     setLoading(true);
     const formattedDateFrom = moment(dateFromRef.current.value).format("YYYY-MM-DD 00:00:00.000");
     const formattedDateTo = moment(dateToRef.current.value).format("YYYY-MM-DD 00:00:00.000");
-    
+
     const payload = {
       // BranchId: userBranchList[0].BranchId,
       BranchId: searchFields?.BranchId || null,
@@ -362,6 +417,10 @@ function Podms() {
   //   setViewOrder(!viewOrder);
   // };
 
+
+
+
+
   useEffect(() => {
     getOrderDetail();
   }, []);
@@ -413,15 +472,34 @@ function Podms() {
 
   const DetailPopover = ({ data }) => {
     return (
-      <div>
+      <div style={{ borderRadius: '8px' }}>
         <Table
-          size='small'
-          className='podms-table'
+          size="small"
           columns={[
-            { title: 'Product Name', dataIndex: 'ProductDetailName', key: 'ProductDetailName' },
-            { title: 'Quantity', dataIndex: 'Quantity', key: 'Quantity' },
-            { title: 'Discount', dataIndex: 'DiscountPercent', key: 'DiscountPercent' },
-            { title: 'Amount', dataIndex: 'PriceWithGST', key: 'PriceWithGST' },
+            {
+              title: <span style={{ fontSize: '12px' }}>Product Name</span>,
+              dataIndex: 'ProductDetailName',
+              key: 'ProductDetailName',
+              className: 'custom-header'
+            },
+            {
+              title: <span style={{ fontSize: '12px' }}>Quantity</span>,
+              dataIndex: 'Quantity',
+              key: 'Quantity',
+              className: 'custom-header'
+            },
+            {
+              title: <span style={{ fontSize: '12px' }}>Discount</span>,
+              dataIndex: 'DiscountPercent',
+              key: 'DiscountPercent',
+              className: 'custom-header'
+            },
+            {
+              title: <span style={{ fontSize: '12px' }}>Amount</span>,
+              dataIndex: 'PriceWithGST',
+              key: 'PriceWithGST',
+              className: 'custom-header'
+            },
           ]}
           dataSource={data?.Table1?.map((item, index) => ({
             key: index,
@@ -431,6 +509,7 @@ function Podms() {
             PriceWithGST: item.PriceWithGST,
           })) || []}
           pagination={false}
+          rowClassName={() => 'custom-row no-hover'}
         />
       </div>
     );
@@ -562,8 +641,8 @@ function Podms() {
                   setSearchFields({
                     ...searchFields,
                     DateFrom: dateValue.value,
-                  }); 
-                  
+                  });
+
                 }}
               />
 
@@ -600,6 +679,8 @@ function Podms() {
       </Collapse>
 
       <br />
+      <div style={{ display: 'flex', justifyContent: 'end', marginBottom: '20px' }}><ExportExcelButton dataSource={filteredData} /></div>
+
       <Table
         loading={loading}
         columns={columns}

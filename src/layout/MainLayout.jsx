@@ -118,7 +118,7 @@ const MainLayout = () => {
           </Content>
         </Layout>
         <footer className="mainFooter">
-          Powered by{" "}
+          Powered by ygen © {new Date().getFullYear()} 
           <a href="/">
             <b></b>
           </a>
